@@ -94,6 +94,134 @@
         }
 
     },
+    "plotting": {
+        "variables": [
+            {
+                "name": "JetPt",
+                "branch": "RecJet_pt_CLASS",
+                "bins": [60, 0, 1000],
+                "title": "Jet p_{T} [GeV]",
+                "ratioRange": 0.3,
+                "selection": "1"
+            },
+            {
+                "name": "DeepFlavB",
+                "branch": "RecJet_btagDeepFlavB_CLASS",
+                "bins": [60, -0.1, 1.1],
+                "title": "DeepJet b+bb+lepb Discriminator",
+                "ratioRange": 0.3,
+                "selection": "1"
+            },
+            {
+                "name": "DeepFlavCvB",
+                "branch": "RecJet_btagDeepFlavCvB_CLASS",
+                "bins": [60, -0.1, 1.1],
+                "title": "DeepJet C/B Discriminator",
+                "ratioRange": 0.3,
+                "selection": "1"
+            },
+            {
+                "name": "DeepFlavCvL",
+                "branch": "RecJet_btagDeepFlavCvL_CLASS",
+                "bins": [60, -0.1, 1.1],
+                "title": "DeepJet C/L Discriminator",
+                "ratioRange": 0.3,
+                "selection": "1"
+            },
+            {
+                "name": "DeepFlavQG",
+                "branch": "RecJet_btagDeepFlavQG_CLASS",
+                "bins": [60, -0.1, 1.1],
+                "title": "DeepJet Q/g Discriminator",
+                "ratioRange": 0.3,
+                "selection": "1"
+            },
+            {
+                "name": "UParTAK4B",
+                "branch": "RecJet_btagUParTAK4B_CLASS",
+                "bins": [60, -0.1, 1.1],
+                "title": "UParTAK4 B Discriminator",
+                "ratioRange": 0.3,
+                "selection": "1"
+            },
+            {
+                "name": "UParTAK4CvB",
+                "branch": "RecJet_btagUParTAK4CvB_CLASS",
+                "bins": [60, -0.1, 1.1],
+                "title": "UParTAK4 C/B Discriminator",
+                "ratioRange": 0.3,
+                "selection": "1"
+            },
+            {
+                "name": "UParTAK4CvL",
+                "branch": "RecJet_btagUParTAK4CvL_CLASS",
+                "bins": [60, -0.1, 1.1],
+                "title": "UParTAK4 C/L Discriminator",
+                "ratioRange": 0.3,
+                "selection": "1"
+            },
+            {
+                "name": "UParTAK4QG",
+                "branch": "RecJet_btagUParTAK4QvG_CLASS",
+                "bins": [60, -0.1, 1.1],
+                "title": "UParTAK4 Q/g Discriminator",
+                "ratioRange": 0.3,
+                "selection": "1"
+            }
+        ],
+        "correlationVariables": [
+            {
+                "name": "GEN p_{T}",
+                "branch": "GenJet_pt",
+                "bins": [100, 0.0, 2000]
+            },
+            {
+                "name": "p_{T}",
+                "branch": "RecJet_pt_CLASSNOTREFINED",
+                "bins": [100, 0.0, 1000]
+            },
+            {
+                "name": "D B",
+                "branch": "RecJet_btagDeepFlavB_CLASS",
+                "bins": [120, -0.1, 1.1]
+            },
+            {
+                "name": "D CvB",
+                "branch": "RecJet_btagDeepFlavCvB_CLASS",
+                "bins": [120, -0.1, 1.1]
+            },
+            {
+                "name": "D CvL",
+                "branch": "RecJet_btagDeepFlavCvL_CLASS",
+                "bins": [120, -0.1, 1.1]
+            },
+            {
+                "name": "D QG",
+                "branch": "RecJet_btagDeepFlavQG_CLASS",
+                "bins": [120, -0.1, 1.1]
+            },
+            {
+                "name": "U B",
+                "branch": "RecJet_btagUParTAK4B_CLASS",
+                "bins": [120, -0.1, 1.1]
+            },
+            {
+                "name": "U CvB",
+                "branch": "RecJet_btagUParTAK4CvB_CLASS",
+                "bins": [120, -0.1, 1.1]
+            },
+            {
+                "name": "U CvL",
+                "branch": "RecJet_btagUParTAK4CvL_CLASS",
+                "bins": [120, -0.1, 1.1]
+            },
+            {
+                "name": "U QG",
+                "branch": "RecJet_btagUParTAK4QvG_CLASS",
+                "bins": [120, -0.1, 1.1]
+            }
+        ]
+    },
     "features" : {
         "parameters" : {
             "GenJet_pt" : ["tanh1200", "logit"],

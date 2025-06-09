@@ -9,6 +9,8 @@ if TYPE_CHECKING:
     from model import RefinementModelBuilder
     from scalers import Scalers
 
+from plotting import PlotterManager
+
 class Trainer:
     def __init__(self, 
     config: "Config", 
@@ -60,7 +62,7 @@ class Trainer:
         print("-" * 60)
         
         for epoch in range(self.epochs):
-
+            self.epoch = epoch
             self.model.train()
             train_loss = 0.0
             train_samples = 0
@@ -76,7 +78,7 @@ class Trainer:
                 self.optimizer.zero_grad()
                 outputs = self.model(inputs)
                 
-                self.losses.calculate(inputs, outputs, targets, epoch, batch_idx, mode='train')
+                self.losses.calculate(inputs, outputs, targets, self.epoch, batch_idx, mode='train')
                 primary_loss = self.losses.get_primary_loss_fn()(inputs, outputs, targets)
                 
                 primary_loss.backward()
@@ -115,7 +117,7 @@ class Trainer:
                 
                 outputs = self.model(inputs)
                 
-                self.losses.calculate(inputs, outputs, targets, 0, batch_idx, mode='validation')
+                self.losses.calculate(inputs, outputs, targets, self.epoch, batch_idx, mode='validation')
                 primary_loss = self.losses.get_primary_loss_fn()(inputs, outputs, targets)
                 
                 val_loss += primary_loss.item() * inputs.size(0)
@@ -154,9 +156,19 @@ class Trainer:
         return avg_test_loss
 
 
-    def save_results(self, output_path: str):
+    def save_results(self, output_path: str, generate_plots: bool = True):
+        # Save model
         m = torch.jit.script(self.model)
         torch.jit.save(m, output_path + "model.pt")
         print(f"Model saved to {output_path + 'model.pt'}")
-        self.dataset.save_root(self.model, "tJet", output_path + "data.root")
-        print(f"Data saved to {output_path +'data.root'}")
+        
+        # Save data
+        root_file_path = output_path + "data.root"
+        self.dataset.save_root(self.model, "tJet", root_file_path)
+        print(f"Data saved to {root_file_path}")
+        
+        # Generate plots if requested
+        if generate_plots:
+            training_id = self.config.generalSettings.trainingId
+            plotter = PlotterManager(self.config, output_path, training_id)
+            plotter.plot_all(root_file_path, self.losses)

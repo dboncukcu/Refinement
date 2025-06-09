@@ -66,8 +66,8 @@ def main():
     print("\nTraining completed successfully!")
     print(f"Final test loss: {test_loss:.6f}")
 
-    loss_manager.save_log(output_path = output_path)
     trainer.save_results(output_path = output_path)
+    loss_manager.save_log(output_path = output_path)
     
     return trained_model, trainer
 
